@@ -1,0 +1,28 @@
+# Dependencies
+frontend/node_modules/
+backend/node_modules/
+
+# Environment files
+frontend/.env
+backend/.env
+.env
+
+# Build folders
+frontend/dist/
+backend/dist/
+build/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Prisma (SQLite only, if ever used)
+backend/prisma/dev.db
