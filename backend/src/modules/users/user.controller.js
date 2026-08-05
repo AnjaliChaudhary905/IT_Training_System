@@ -27,12 +27,14 @@ const getAllUsers = asyncHandler(async (req, res) => {
 const getUserById = asyncHandler(async (req, res) => {
     const { id } = req.params;
 
+    const user = await userService.getUserById(id);
+
     return successResponse(
         res,
         user,
-        "user fetched successfully"
-    )
-})
+        "User fetched successfully"
+    );
+});
 
 const updateUser = asyncHandler(async (req, res) => {
     const { id } = req.params;

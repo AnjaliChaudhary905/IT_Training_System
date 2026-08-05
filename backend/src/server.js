@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import app from "./app.js";
-import connectDB from "./config/database/mongodb.js";
+import connectDB from "./config/db/mongodb.js";
+
 
 dotenv.config();
 

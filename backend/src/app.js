@@ -3,7 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import { errorHandler } from "./middleware/error.middleware";
+import { errorHandler } from "./middleware/error.middleware.js";
 import userRoutes from "./modules/users/user.routes.js";
 
 const app = express();
