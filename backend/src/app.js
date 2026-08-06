@@ -5,6 +5,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./middleware/error.middleware.js";
 import userRoutes from "./modules/users/user.routes.js";
+import authRoutes from "./modules/auth/auth.routes.js";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api/users",userRoutes);
+app.use("/api/auth",authRoutes);
 
 app.use(errorHandler);
 
