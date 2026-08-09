@@ -1,9 +1,5 @@
 import nodemailer from "nodemailer";
 
-console.log("EMAIL_SERVICE:", process.env.EMAIL_SERVICE);
-console.log("EMAIL_USERNAME:", process.env.EMAIL_USERNAME);
-console.log("EMAIL_FROM:", process.env.EMAIL_FROM);
-
 const transporter = nodemailer.createTransport({
     service: process.env.EMAIL_SERVICE,
     auth: {
