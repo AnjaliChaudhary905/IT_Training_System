@@ -11,6 +11,8 @@ import instructorRoutes from "./modules/instructor/instructor.routes.js"
 import studentRoutes from "./modules/student/student.routes.js"
 import enrollmentRoutes from "./modules/enrollment/enrollment.routes.js";
 import paymentRoutes from "./modules/payments/payment.routes.js";
+import attendanceRoutes from "./modules/attendance/attendance.routes.js";
+import dashboardRoutes from "./modules/dashboard/dashboard.routes.js";
 const app = express();
 
 app.use(
@@ -33,6 +35,8 @@ app.use("/api/instructor",instructorRoutes);
 app.use("/api/students",studentRoutes)
 app.use("/api/enrollments", enrollmentRoutes);
 app.use("/api/payments", paymentRoutes);
+app.use("/api/attendance", attendanceRoutes);
+app.use("/api/dashboard",dashboardRoutes);
 
 app.use(errorHandler);
 
