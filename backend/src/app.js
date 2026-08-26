@@ -13,6 +13,7 @@ import enrollmentRoutes from "./modules/enrollment/enrollment.routes.js";
 import paymentRoutes from "./modules/payments/payment.routes.js";
 import attendanceRoutes from "./modules/attendance/attendance.routes.js";
 import dashboardRoutes from "./modules/dashboard/dashboard.routes.js";
+import contactRoutes from "./modules/contact/contact.routes.js";
 const app = express();
 
 app.use(
@@ -37,6 +38,7 @@ app.use("/api/enrollments", enrollmentRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/attendance", attendanceRoutes);
 app.use("/api/dashboard",dashboardRoutes);
+app.use("/api/contact",contactRoutes);
 
 app.use(errorHandler);
 

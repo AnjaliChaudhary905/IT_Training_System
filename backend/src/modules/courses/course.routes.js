@@ -31,13 +31,21 @@ router.post(
 
 router.get(
     "/",
-    protect,
     courseController.getAllCourses
 );
 
 router.get(
+    "/categories",
+    courseController.getCategories
+);
+
+router.get(
+    "/category/:category",
+    courseController.getCoursesByCategory
+);
+
+router.get(
     "/:id",
-    protect,
     courseController.getCourseById
 );
 

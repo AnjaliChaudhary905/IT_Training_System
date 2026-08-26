@@ -27,6 +27,26 @@ const getAllCourses = asyncHandler(async (req, res) => {
     )
 })
 
+const getCoursesByCategory = asyncHandler(async(req,res)=>{
+    const category = req.params.category;
+    const courses = await courseService.getCoursesByCategory(category);
+    return successResponse(
+        res,
+        courses,
+        "courses retrieved successfully"
+    )
+})
+
+const getCategories = asyncHandler(async(req,res)=>{
+    const categories = await courseService.getCategories();
+
+    return successResponse(
+        res,
+        categories,
+        "categories retrived successfully"
+    )
+})
+
 const getCourseById = asyncHandler(async (req, res) => {
     const course = await courseService.getCourseById(
         req.params.id
@@ -67,6 +87,8 @@ const courseController = {
 
     createCourse,
     getAllCourses,
+    getCoursesByCategory,
+    getCategories,
     getCourseById,
     updateCourse,
     deleteCourse,

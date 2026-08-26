@@ -40,9 +40,25 @@ const createCourse = async (courseData, userId, imageFile) => {
 };
 
 const getAllCourses = async()=>{
-    return await Course.find()
-    .populate("createdBy", "firstName lastName email")
-    .sort({createdAt: -1})
+    const courses =  await Course.find()
+
+    return courses;
+}
+
+const getCoursesByCategory = async (category) => {
+    const courses = await Course.find({
+        category: {
+            $regex: `^${category}$`,
+            $options: "i"
+        }
+    });
+
+    return courses;
+};
+
+const getCategories = async() =>{
+    const categories = await Course.distinct("category");
+    return categories;
 }
 
 const getCourseById = async(id)=>{
@@ -133,6 +149,8 @@ const deleteCourse = async (id) => {
 const courseService = {
     createCourse,
     getAllCourses,
+    getCoursesByCategory,
+    getCategories,
     getCourseById,
     updateCourse,
     deleteCourse,
