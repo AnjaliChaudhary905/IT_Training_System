@@ -1,80 +1,252 @@
-import { Link } from 'react-router-dom';
-import { GraduationCap, MapPin, Phone, Mail} from 'lucide-react';
-import { SITE_CONFIG } from '../../config/siteConfig';
+import { MapPin, Phone, Mail } from "lucide-react";
+import {
+    FaFacebookF,
+    FaInstagram,
+    FaLinkedinIn,
+} from "react-icons/fa";
 
 const Footer = () => {
-  return (
-    <footer className="bg-slate-900 text-slate-400 text-xs">
-      {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-        
-        {/* Brand Info */}
-        <div className="lg:col-span-2 space-y-4">
-          <Link to="/" className="flex items-center gap-2 text-xl font-bold text-white tracking-tight">
-            <span className="p-2 bg-blue-600 text-white rounded-lg flex items-center justify-center">
-              <GraduationCap className="w-5 h-5" />
-            </span>
-            {SITE_CONFIG.name} <span className="text-blue-400">{SITE_CONFIG.tagline}</span>
-          </Link>
-          <p className="text-slate-400 leading-relaxed pr-4">
-            Advancing technical expertise through project-first training, professional certifications, and corporate career pathways.
-          </p>
-        </div>
+    return (
+        <footer className="bg-[#071A40] text-white">
 
-        {/* Quick Links */}
-        <div className="space-y-3">
-          <h4 className="text-sm font-semibold text-white">Quick Links</h4>
-          <ul className="space-y-2">
-            <li><Link to="/courses" className="hover:text-white transition-colors">All Programs</Link></li>
-            <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
-            <li><Link to="/admission" className="hover:text-white transition-colors">Admissions</Link></li>
-            <li><Link to="/placement" className="hover:text-white transition-colors">Career Placement</Link></li>
-          </ul>
-        </div>
+            {/* Main Footer */}
+            <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
 
-        {/* Popular Tracks */}
-        <div className="space-y-3">
-          <h4 className="text-sm font-semibold text-white">Popular Tracks</h4>
-          <ul className="space-y-2">
-            <li><Link to="/courses" className="hover:text-white transition-colors">Full-Stack Web Dev</Link></li>
-            <li><Link to="/courses" className="hover:text-white transition-colors">Data Science & AI</Link></li>
-            <li><Link to="/courses" className="hover:text-white transition-colors">UI/UX & Product Design</Link></li>
-          </ul>
-        </div>
+                <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
 
-        {/* Contact Info */}
-        <div className="space-y-3">
-          <h4 className="text-sm font-semibold text-white">Contact Us</h4>
-          <ul className="space-y-2.5">
-            <li className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-              <span>{SITE_CONFIG.address}</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-blue-400 shrink-0" />
-              <span>{SITE_CONFIG.phone}</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-blue-400 shrink-0" />
-              <span>{SITE_CONFIG.email}</span>
-            </li>
-          </ul>
-        </div>
+                    {/* Brand */}
+                    <div>
+                        <h2 className="text-2xl font-bold">
+                            IT
+                            <span className="text-[#F9A825]">
+                                Training
+                            </span>
+                        </h2>
 
-      </div>
+                        <p className="mt-4 max-w-sm text-sm leading-7 text-slate-400">
+                            Practical, industry-focused training designed
+                            to help students build real-world technical
+                            skills and prepare for successful careers.
+                        </p>
 
-      {/* Copyright Bar */}
-      <div className="border-t border-slate-800 bg-slate-950 py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-500">
-          <p>© {new Date().getFullYear()} {SITE_CONFIG.fullName}. All rights reserved.</p>
-          <div className="flex gap-4">
-            <Link to="/privacy" className="hover:text-slate-400">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-slate-400">Terms of Service</Link>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+                        {/* Social Media */}
+                        <div className="mt-6 flex gap-3">
+
+                            <a
+                                href="#"
+                                aria-label="Facebook"
+                                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-slate-400 transition hover:border-[#F9A825] hover:bg-[#F9A825] hover:text-[#071A40]"
+                            >
+                                <FaFacebookF size={17} />
+                            </a>
+
+                            <a
+                                href="#"
+                                aria-label="Instagram"
+                                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-slate-400 transition hover:border-[#F9A825] hover:bg-[#F9A825] hover:text-[#071A40]"
+                            >
+                                <FaInstagram size={17} />
+                            </a>
+
+                            <a
+                                href="#"
+                                aria-label="LinkedIn"
+                                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-slate-400 transition hover:border-[#F9A825] hover:bg-[#F9A825] hover:text-[#071A40]"
+                            >
+                                <FaLinkedinIn size={17} />
+                            </a>
+
+                        </div>
+                    </div>
+
+                    {/* Quick Links */}
+                    <div>
+                        <h3 className="text-sm font-semibold uppercase tracking-wider text-[#F9A825]">
+                            Quick Links
+                        </h3>
+
+                        <ul className="mt-5 space-y-3 text-sm text-slate-400">
+
+                            <li>
+                                <a
+                                    href="/"
+                                    className="transition hover:text-white"
+                                >
+                                    Home
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="/courses"
+                                    className="transition hover:text-white"
+                                >
+                                    Courses
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="/about"
+                                    className="transition hover:text-white"
+                                >
+                                    About Us
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="/contact"
+                                    className="transition hover:text-white"
+                                >
+                                    Contact
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    {/* Popular Courses */}
+                    <div>
+                        <h3 className="text-sm font-semibold uppercase tracking-wider text-[#F9A825]">
+                            Popular Courses
+                        </h3>
+
+                        <ul className="mt-5 space-y-3 text-sm text-slate-400">
+
+                            <li>
+                                <a
+                                    href="/courses"
+                                    className="transition hover:text-white"
+                                >
+                                    MERN Stack Development
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="/courses"
+                                    className="transition hover:text-white"
+                                >
+                                    Python with Django
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="/courses"
+                                    className="transition hover:text-white"
+                                >
+                                    Data Science with Python
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="/courses"
+                                    className="transition hover:text-white"
+                                >
+                                    Graphic Design
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    {/* Contact */}
+                    <div>
+                        <h3 className="text-sm font-semibold uppercase tracking-wider text-[#F9A825]">
+                            Contact Us
+                        </h3>
+
+                        <div className="mt-5 space-y-4 text-sm text-slate-400">
+
+                            {/* Address */}
+                            <div className="flex items-start gap-3">
+                                <MapPin
+                                    size={18}
+                                    className="mt-0.5 shrink-0 text-[#F9A825]"
+                                />
+
+                                <span>
+                                    Koteshwor, Kathmandu,
+                                    <br />
+                                    Nepal
+                                </span>
+                            </div>
+
+                            {/* Phone */}
+                            <div className="flex items-center gap-3">
+                                <Phone
+                                    size={18}
+                                    className="shrink-0 text-[#F9A825]"
+                                />
+
+                                <a
+                                    href="tel:+9779851344071"
+                                    className="transition hover:text-white"
+                                >
+                                    +977 9851344071
+                                </a>
+                            </div>
+
+                            {/* Email */}
+                            <div className="flex items-start gap-3">
+                                <Mail
+                                    size={18}
+                                    className="mt-0.5 shrink-0 text-[#F9A825]"
+                                />
+
+                                <a
+                                    href="mailto:infotech@sipalaya.com"
+                                    className="break-all transition hover:text-white"
+                                >
+                                    infotech@sipalaya.com
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {/* Bottom Bar */}
+            <div className="border-t border-slate-800">
+
+                <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-6 text-center text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:text-left lg:px-8">
+
+                    {/* Copyright */}
+                    <p>
+                        © {new Date().getFullYear()} IT Training.
+                        All rights reserved.
+                    </p>
+
+                    {/* Legal Links */}
+                    <div className="flex justify-center gap-6 sm:justify-end">
+
+                        <a
+                            href="#"
+                            className="transition hover:text-white"
+                        >
+                            Privacy Policy
+                        </a>
+
+                        <a
+                            href="#"
+                            className="transition hover:text-white"
+                        >
+                            Terms & Conditions
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </footer>
+    );
 };
 
 export default Footer;

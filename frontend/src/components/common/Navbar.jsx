@@ -1,71 +1,133 @@
-import { Link } from 'react-router-dom';
-import { GraduationCap, MapPin, Phone, Sparkles, Sun, Moon } from 'lucide-react';
-import { SITE_CONFIG } from '../../config/siteConfig';
-import { useTheme } from '../../context/theme-context';
+import { useState } from "react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navigationLinks = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "about" },
+    { name: "Courses", href: "courses" },
+    { name: "Instructors", href: "instructors" },
+    { name: "Contact", href: "contact" },
+  ];
+
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <header className="sticky top-0 z-50 bg-[var(--bg-main)] border-b border-[var(--border-color)] transition-colors">
-      {/* Top Announcement Bar */}
-      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-blue-400" /> {SITE_CONFIG.address}
-            </span>
-            <span className="hidden md:flex items-center gap-1.5">
-              <Phone className="w-3.5 h-3.5 text-blue-400" /> {SITE_CONFIG.phone}
-            </span>
+    <>
+      <div className="bg-[#061A3A] text-white/70">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-5 py-2 text-xs sm:px-8">
+          <div className="flex flex-wrap gap-x-5 gap-y-1">
+            <span>Koteshwor, Kathmandu</span>
+            <span>infotech@sipalaya.com</span>
+            <span>9851344071 / 9806393939</span>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-emerald-400 font-medium flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5" /> Admissions Open for ApexTech Batches
-            </span>
+
+          <div className="hidden gap-4 sm:flex">
+            <span>Facebook</span>
+            <span>LinkedIn</span>
+            <span>Instagram</span>
           </div>
         </div>
       </div>
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#071B41]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+      
+          <a href="/" className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#F5A623] text-xl font-bold text-[#071B41]">
+              S
+            </div>
 
-      {/* Main Navigation */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand Logo */}
-        <Link to="/" className="flex items-center gap-2 text-xl font-bold text-[var(--text-primary)] tracking-tight">
-          <span className="p-2 bg-blue-600 text-white rounded-lg flex items-center justify-center shadow-md shadow-blue-500/20">
-            <GraduationCap className="w-5 h-5" />
-          </span>
-          {SITE_CONFIG.name} <span className="text-[var(--accent-blue)]">{SITE_CONFIG.tagline}</span>
-        </Link>
+            <div>
+              <h1 className="font-serif text-base font-semibold leading-tight text-white">
+                Sipalaya Info Tech
+              </h1>
 
-        {/* Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-[var(--text-secondary)]">
-          <Link to="/courses" className="hover:text-[var(--accent-blue)] transition-colors">Courses</Link>
-          <Link to="/about" className="hover:text-[var(--accent-blue)] transition-colors">About Us</Link>
-          <Link to="/admission" className="hover:text-[var(--accent-blue)] transition-colors">Admissions</Link>
-          <Link to="/placement" className="hover:text-[var(--accent-blue)] transition-colors">Placement</Link>
-          <Link to="/blog" className="hover:text-[var(--accent-blue)] transition-colors">Insights</Link>
-        </nav>
+              <p className="text-[9px] uppercase tracking-[0.18em] text-white/50">
+                IT Training · Koteshwor
+              </p>
+            </div>
+          </a>
 
-        {/* Action Buttons & Theme Toggle */}
-        <div className="flex items-center gap-3">
-          {/* Light/Dark Toggle Button */}
+          {/* Desktop navigation */}
+          <nav className="hidden items-center gap-8 lg:flex">
+            {navigationLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="relative text-sm font-medium text-white/75 transition hover:text-white"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+
+          <div className="hidden items-center gap-3 lg:flex">
+            <a
+              href="#contact"
+              className="rounded-md border border-white/30 px-5 py-2.5 text-sm font-medium text-white transition hover:border-white hover:bg-white/5"
+            >
+              Free Demo
+            </a>
+
+            <a
+              href="#courses"
+              className="flex items-center gap-2 rounded-md bg-[#F5A623] px-5 py-2.5 text-sm font-semibold text-[#071B41] transition hover:bg-[#ffb43d]"
+            >
+              Enroll Now
+              <ArrowUpRight size={16} />
+            </a>
+          </div>
+
+          {/* Mobile menu button */}
           <button
-            onClick={toggleTheme}
-            className="p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] transition-all cursor-pointer"
-            aria-label="Toggle Theme"
+            type="button"
+            onClick={handleMenuToggle}
+            className="rounded-md p-2 text-white lg:hidden"
+            aria-label="Toggle navigation menu"
           >
-            {theme === 'light' ? <Moon className="w-4 h-4 text-slate-700" /> : <Sun className="w-4 h-4 text-amber-400" />}
+            {isMenuOpen ? <X size={25} /> : <Menu size={25} />}
           </button>
-
-          <Link to="/student/login" className="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors px-3 py-2">
-            Student Portal
-          </Link>
-          <Link to="/admission" className="text-sm font-semibold px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md shadow-blue-600/20 transition-all">
-            Apply Now
-          </Link>
         </div>
-      </div>
-    </header>
+
+        {/* Mobile navigation */}
+        {isMenuOpen && (
+          <div className="border-t border-white/10 bg-[#071B41] px-5 py-5 lg:hidden">
+            <nav className="flex flex-col gap-4">
+              {navigationLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-sm font-medium text-white/80 transition hover:text-[#F5A623]"
+                >
+                  {link.name}
+                </a>
+              ))}
+
+              <div className="mt-2 flex flex-col gap-3 border-t border-white/10 pt-4">
+                <a
+                  href="#contact"
+                  className="rounded-md border border-white/30 px-4 py-2.5 text-center text-sm text-white"
+                >
+                  Free Demo
+                </a>
+
+                <a
+                  href="#courses"
+                  className="rounded-md bg-[#F5A623] px-4 py-2.5 text-center text-sm font-semibold text-[#071B41]"
+                >
+                  Enroll Now
+                </a>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
+    </>
   );
 };
 

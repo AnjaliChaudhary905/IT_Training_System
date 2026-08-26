@@ -1,29 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap");
+
 @import "tailwindcss";
 
 :root {
-  /* Light Theme Palette */
-  --bg-main: #ffffff;
-  --bg-card: #f8fafc;
-  --bg-card-hover: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --border-color: #e2e8f0;
-  --accent-blue: #2563eb;
+  font-family: "Inter", sans-serif;
+  color: #1f2937;
+  background: #f7f5ee;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
-.dark {
-  /* Dark Theme Palette */
-  --bg-main: #020617;
-  --bg-card: #0f172a;
-  --bg-card-hover: #1e293b;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --border-color: #1e293b;
-  --accent-blue: #3b82f6;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg-main);
-  color: var(--text-primary);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  margin: 0;
+  min-width: 320px;
+  background: #f7f5ee;
+}
+
+button,
+a {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "DM Serif Display", serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }

@@ -1,20 +1,22 @@
 
-import HeroSection from "../../components/home/HeroSection";
-import CourseSearch from "../../components/home/CourseSearch";
-import HighlightServices from "../../components/home/HighlightServices";
-import SuccessMetrics from "../../components/home/SuccessMetrics";
+import CallToAction from "../../components/home/CallToAction";
 import FeaturedCourses from "../../components/home/FeaturedCourses";
+import HeroSection from "../../components/home/HeroSection";
+import HighlightServices from "../../components/home/HighlightServices";
+import IndustryLeaders from "../../components/home/IndustryLeaders";
+import SuccessMetrics from "../../components/home/SuccessMetrics";
+
 const Home = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans antialiased">
       <main>
         <HeroSection />
-        <CourseSearch />
+        <FeaturedCourses />
         <HighlightServices />
         <SuccessMetrics />
-        <FeaturedCourses />
+        <IndustryLeaders />
+        <CallToAction />
       </main>
-    </div>
   );
-}
+};
+
 export default Home;

@@ -1,56 +1,87 @@
-import { Code2, Users, Briefcase, Award } from 'lucide-react';
+import {
+    BriefcaseBusiness,
+    Code2,
+    GraduationCap,
+    Users,
+} from "lucide-react";
+
+const services = [
+    {
+        icon: GraduationCap,
+        title: "Industry-Focused Training",
+        description:
+            "Learn practical skills based on real industry requirements and current technologies.",
+    },
+    {
+        icon: Code2,
+        title: "Hands-On Projects",
+        description:
+            "Build real-world projects that help you turn concepts into practical experience.",
+    },
+    {
+        icon: Users,
+        title: "Expert Instructors",
+        description:
+            "Learn from experienced instructors who provide practical guidance throughout your training.",
+    },
+    {
+        icon: BriefcaseBusiness,
+        title: "Career-Oriented Learning",
+        description:
+            "Develop job-ready skills and confidence to take the next step in your technology career.",
+    },
+];
 
 const HighlightServices = () => {
-  const pillars = [
-    {
-      icon: <Code2 className="w-6 h-6 text-blue-500" />,
-      title: "Project-First Curriculum",
-      description: "Build real-world web, cloud, and data projects to assemble a production-ready portfolio."
-    },
-    {
-      icon: <Users className="w-6 h-6 text-emerald-500" />,
-      title: "1-on-1 Mentorship",
-      description: "Learn directly from senior software engineers and industry practitioners."
-    },
-    {
-      icon: <Briefcase className="w-6 h-6 text-indigo-500" />,
-      title: "Career & Placement",
-      description: "Resume optimization, technical interview prep, and direct employer referral pipelines."
-    },
-    {
-      icon: <Award className="w-6 h-6 text-amber-500" />,
-      title: "Industry Certification",
-      description: "Earn accredited certifications recognized by tech companies and hiring partners."
-    }
-  ];
+    return (
+        <section className="bg-white py-20">
+            <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-6">
 
-  return (
-    <section className="py-16 bg-[var(--bg-main)] border-b border-[var(--border-color)] transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--accent-blue)] mb-2">Our Educational Pillars</h2>
-          <p className="text-3xl font-extrabold text-[var(--text-primary)]">Why Train at ApexTech?</p>
-        </div>
+                {/* Section Heading */}
+                <div className="mx-auto max-w-2xl text-center">
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#C47D10]">
+                        Why Choose Us
+                    </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((item, index) => (
-            <div 
-              key={index}
-              className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6 hover:bg-[var(--bg-card-hover)] transition-all flex flex-col justify-between"
-            >
-              <div className="space-y-4">
-                <div className="p-3 bg-[var(--bg-main)] rounded-xl w-fit border border-[var(--border-color)] shadow-sm">
-                  {item.icon}
+                    <h2 className="mt-3 font-serif text-3xl font-bold text-[#071A40] sm:text-4xl">
+                        Learn Skills That Move You Forward
+                    </h2>
+
+                    <p className="mt-4 text-base leading-7 text-gray-500">
+                        We combine practical training, experienced instructors,
+                        and real-world projects to help you build skills that
+                        matter in today's technology industry.
+                    </p>
                 </div>
-                <h3 className="text-lg font-bold text-[var(--text-primary)]">{item.title}</h3>
-                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{item.description}</p>
-              </div>
+
+                {/* Features */}
+                <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    {services.map((service) => {
+                        const Icon = service.icon;
+
+                        return (
+                            <div
+                                key={service.title}
+                                className="group rounded-2xl border border-gray-100 bg-white p-7 text-center transition duration-300 hover:-translate-y-1 hover:border-[#F9A825]/40 hover:shadow-lg"
+                            >
+                                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-[#071A40] text-[#F9A825] transition duration-300 group-hover:bg-[#F9A825] group-hover:text-[#071A40]">
+                                    <Icon size={27} strokeWidth={1.8} />
+                                </div>
+
+                                <h3 className="mt-5 text-lg font-semibold text-[#071A40]">
+                                    {service.title}
+                                </h3>
+
+                                <p className="mt-3 text-sm leading-6 text-gray-500">
+                                    {service.description}
+                                </p>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+        </section>
+    );
 };
 
 export default HighlightServices;
