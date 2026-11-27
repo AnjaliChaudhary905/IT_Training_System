@@ -28,6 +28,74 @@ export const updateInstructorValidation = [
         .trim()
         .isURL()
         .withMessage("Avatar must be a valid URL"),
+
+    body("specialization")
+        .optional()
+        .trim()
+        .isLength({ max: 100 })
+        .withMessage(
+            "Specialization cannot exceed 100 characters"
+        ),
+
+    body("experience")
+        .optional()
+        .isInt({ min: 0 })
+        .withMessage(
+            "Experience must be a non-negative number"
+        ),
+
+    body("qualification")
+        .optional()
+        .trim()
+        .isLength({ max: 150 })
+        .withMessage(
+            "Qualification cannot exceed 150 characters"
+        ),
+
+    body("bio")
+        .optional()
+        .trim()
+        .isLength({ max: 1000 })
+        .withMessage(
+            "Bio cannot exceed 1000 characters"
+        ),
+
+    body("expertise")
+        .optional()
+        .custom((value) => {
+            let expertise;
+
+            try {
+                expertise =
+                    typeof value === "string"
+                        ? JSON.parse(value)
+                        : value;
+            } catch (error) {
+                throw new Error(
+                    "Expertise must be a valid JSON array"
+                );
+            }
+
+            if (!Array.isArray(expertise)) {
+                throw new Error(
+                    "Expertise must be an array"
+                );
+            }
+
+            if (
+                expertise.some(
+                    (item) =>
+                        typeof item !== "string" ||
+                        !item.trim()
+                )
+            ) {
+                throw new Error(
+                    "Expertise items cannot be empty"
+                );
+            }
+
+            return true;
+        }),
 ];
 
 export const instructorIdValidation = [
@@ -63,11 +131,73 @@ export const updateInstructorByAdminValidation = [
         .notEmpty()
         .withMessage("Phone number cannot be empty"),
 
-    body("avatar")
+    body("specialization")
         .optional()
         .trim()
-        .isURL()
-        .withMessage("Avatar must be a valid URL"),
+        .isLength({ max: 100 })
+        .withMessage(
+            "Specialization cannot exceed 100 characters"
+        ),
+
+    body("experience")
+        .optional()
+        .isInt({ min: 0 })
+        .withMessage(
+            "Experience must be a non-negative number"
+        ),
+
+    body("qualification")
+        .optional()
+        .trim()
+        .isLength({ max: 150 })
+        .withMessage(
+            "Qualification cannot exceed 150 characters"
+        ),
+
+    body("bio")
+        .optional()
+        .trim()
+        .isLength({ max: 1000 })
+        .withMessage(
+            "Bio cannot exceed 1000 characters"
+        ),
+
+    body("expertise")
+        .optional()
+        .custom((value) => {
+            let expertise;
+
+            try {
+                expertise =
+                    typeof value === "string"
+                        ? JSON.parse(value)
+                        : value;
+            } catch (error) {
+                throw new Error(
+                    "Expertise must be a valid JSON array"
+                );
+            }
+
+            if (!Array.isArray(expertise)) {
+                throw new Error(
+                    "Expertise must be an array"
+                );
+            }
+
+            if (
+                expertise.some(
+                    (item) =>
+                        typeof item !== "string" ||
+                        !item.trim()
+                )
+            ) {
+                throw new Error(
+                    "Expertise items cannot be empty"
+                );
+            }
+
+            return true;
+        }),
 ];
 export const updateInstructorStatusValidation = [
     ...instructorIdValidation,

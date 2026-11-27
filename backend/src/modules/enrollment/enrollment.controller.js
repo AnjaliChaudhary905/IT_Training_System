@@ -1,10 +1,9 @@
+
 import { successResponse } from "../../utils/apiResponse.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import enrollmentService from "./enrollment.service.js";
 
-
 const createEnrollment = asyncHandler(async (req, res) => {
-
     const enrollment = await enrollmentService.createEnrollment(
         req.user._id,
         req.body.courseId
@@ -18,9 +17,7 @@ const createEnrollment = asyncHandler(async (req, res) => {
     );
 });
 
-
 const getMyEnrollments = asyncHandler(async (req, res) => {
-
     const enrollments = await enrollmentService.getMyEnrollments(
         req.user._id
     );
@@ -33,9 +30,22 @@ const getMyEnrollments = asyncHandler(async (req, res) => {
     );
 });
 
+const getEnrollmentsByCourse = asyncHandler(async (req, res) => {
+    const enrollments = await enrollmentService.getEnrollmentsByCourse(
+        req.params.courseId,
+        req.user._id,
+        req.user.role
+    );
+
+    return successResponse(
+        res,
+        enrollments,
+        "Course enrollments fetched successfully",
+        200
+    );
+});
 
 const getEnrollmentById = asyncHandler(async (req, res) => {
-
     const enrollment = await enrollmentService.getEnrollmentById(
         req.params.id,
         req.user._id,
@@ -50,9 +60,7 @@ const getEnrollmentById = asyncHandler(async (req, res) => {
     );
 });
 
-
 const getAllEnrollments = asyncHandler(async (req, res) => {
-
     const enrollments = await enrollmentService.getAllEnrollments();
 
     return successResponse(
@@ -63,12 +71,12 @@ const getAllEnrollments = asyncHandler(async (req, res) => {
     );
 });
 
-
 const updateEnrollmentStatus = asyncHandler(async (req, res) => {
-
     const enrollment = await enrollmentService.updateEnrollmentStatus(
         req.params.id,
-        req.body.status
+        req.body.status,
+        req.user._id,
+        req.user.role
     );
 
     return successResponse(
@@ -79,9 +87,7 @@ const updateEnrollmentStatus = asyncHandler(async (req, res) => {
     );
 });
 
-
 const cancelEnrollment = asyncHandler(async (req, res) => {
-
     const enrollment = await enrollmentService.cancelEnrollment(
         req.params.id,
         req.user._id
@@ -95,15 +101,29 @@ const cancelEnrollment = asyncHandler(async (req, res) => {
     );
 });
 
+const getEnrollmentsByStudent = asyncHandler(async (req, res) => {
+    const { studentId } = req.params;
+
+    const enrollments = await enrollmentService.getEnrollmentsByStudent(
+        studentId
+    );
+
+    return successResponse(
+        res,
+        enrollments,
+        "Student enrollments fetched successfully"
+    );
+});
 
 const enrollmentController = {
     createEnrollment,
     getMyEnrollments,
+    getEnrollmentsByCourse,
     getEnrollmentById,
     getAllEnrollments,
+    getEnrollmentsByStudent,
     updateEnrollmentStatus,
     cancelEnrollment,
 };
-
 
 export default enrollmentController;

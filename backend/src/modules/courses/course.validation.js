@@ -1,5 +1,6 @@
 import { body } from "express-validator";
 
+// Create Course Validation
 export const createCourseValidation = [
     body("title")
         .trim()
@@ -61,8 +62,15 @@ export const createCourseValidation = [
         .isISO8601()
         .withMessage("Enrollment deadline must be a valid date"),
 
+    // Optional instructor assignment
+    body("instructor")
+        .optional({ values: "falsy" })
+        .isMongoId()
+        .withMessage("Invalid instructor ID"),
 ];
 
+
+// Update Course Validation
 export const updateCourseValidation = [
     body("title")
         .optional()
@@ -129,4 +137,10 @@ export const updateCourseValidation = [
         .optional()
         .isBoolean()
         .withMessage("isActive must be a boolean"),
+
+    // Optional instructor assignment or removal
+    body("instructor")
+        .optional({ values: "falsy" })
+        .isMongoId()
+        .withMessage("Invalid instructor ID"),
 ];

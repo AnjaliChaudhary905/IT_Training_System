@@ -1,4 +1,5 @@
 import Attendance from "../attendance/attendance.model.js";
+import Contact from "../contact/contact.model.js";
 import Course from "../courses/course.model.js";
 import Enrollment from "../enrollment/enrollment.model.js";
 import Payment from "../payments/payment.model.js";
@@ -148,6 +149,11 @@ const getAdminDashboard = async () => {
             createdAt: -1,
         })
         .limit(5);
+    const recentMessages = await Contact.find()
+        .sort({
+            createdAt: -1,
+        })
+        .limit(5);
 
     return {
         overview: {
@@ -182,12 +188,112 @@ const getAdminDashboard = async () => {
 
         recentEnrollments,
         recentPayments,
+        recentMessages,
+    };
+};
+
+const getInstructorDashboard = async (instructorId) => {
+    // Find only courses assigned to the logged-in instructor.
+    const assignedCourses = await Course.find({
+        instructor: instructorId,
+    }).select("_id title");
+
+    const courseIds = assignedCourses.map((course) => course._id);
+
+    // If no courses are assigned, return zero statistics.
+    if (courseIds.length === 0) {
+        return {
+            overview: {
+                totalCourses: 0,
+                totalStudents: 0,
+                totalEnrollments: 0,
+                pendingEnrollments: 0,
+            },
+            attendance: {
+                present: 0,
+                absent: 0,
+                late: 0,
+                total: 0,
+            },
+            recentEnrollments: [],
+        };
+    }
+
+    const courseFilter = {
+        course: { $in: courseIds },
+    };
+
+    const [
+        totalEnrollments,
+        pendingEnrollments,
+        studentIds,
+        presentAttendance,
+        absentAttendance,
+        lateAttendance,
+        recentEnrollments,
+    ] = await Promise.all([
+        Enrollment.countDocuments(courseFilter),
+
+        Enrollment.countDocuments({
+            ...courseFilter,
+            status: "pending",
+        }),
+
+        Enrollment.distinct("student", {
+            ...courseFilter,
+            status: {
+                $nin: ["rejected", "cancelled"],
+            },
+        }),
+
+        Attendance.countDocuments({
+            ...courseFilter,
+            status: "present",
+        }),
+
+        Attendance.countDocuments({
+            ...courseFilter,
+            status: "absent",
+        }),
+
+        Attendance.countDocuments({
+            ...courseFilter,
+            status: "late",
+        }),
+
+        Enrollment.find(courseFilter)
+            .populate("student", "firstName lastName email")
+            .populate("course", "title")
+            .sort({ createdAt: -1 })
+            .limit(5),
+    ]);
+
+    return {
+        overview: {
+            totalCourses: assignedCourses.length,
+            totalStudents: studentIds.length,
+            totalEnrollments,
+            pendingEnrollments,
+        },
+
+        attendance: {
+            present: presentAttendance,
+            absent: absentAttendance,
+            late: lateAttendance,
+            total:
+                presentAttendance +
+                absentAttendance +
+                lateAttendance,
+        },
+
+        recentEnrollments,
     };
 };
 
 
 const dashboardService = {
     getAdminDashboard,
+    getInstructorDashboard,
 };
 
 

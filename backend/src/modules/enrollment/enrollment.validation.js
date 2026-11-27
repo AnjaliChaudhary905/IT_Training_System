@@ -35,3 +35,14 @@ export const updateEnrollmentStatusValidation = [
         ])
         .withMessage("Invalid enrollment status"),
 ];
+export const studentEnrollmentValidation = [
+  param("studentId")
+    .isMongoId()
+    .withMessage("Invalid student ID"),
+];
+
+export const courseEnrollmentValidation = [
+    param("courseId")
+        .isMongoId()
+        .withMessage("Invalid course ID"),
+];

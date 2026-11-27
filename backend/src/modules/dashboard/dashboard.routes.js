@@ -12,4 +12,11 @@ router.get(
     dashboardController.getAdminDashboard
 );
 
+router.get(
+    "/instructor",
+    protect,
+    authorize("instructor"),
+    dashboardController.getInstructorDashboard
+);
+
 export default router;

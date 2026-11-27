@@ -14,8 +14,21 @@ const getAdminDashboard = asyncHandler(async(req,res)=>{
     )
 })
 
+const getInstructorDashboard = asyncHandler(async (req, res) => {
+    const dashboard = await dashboardService.getInstructorDashboard(
+        req.user._id
+    );
+
+    return successResponse(
+        res,
+        dashboard,
+        "Instructor dashboard fetched successfully"
+    );
+});
+
 const dashboardController = {
     getAdminDashboard,
+    getInstructorDashboard,
 }
 
 export default dashboardController;

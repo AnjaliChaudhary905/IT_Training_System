@@ -1,7 +1,7 @@
+
 import { successResponse } from "../../utils/apiResponse.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import attendanceService from "./attendance.service.js";
-
 
 const createAttendance = asyncHandler(async (req, res) => {
     const attendance = await attendanceService.createAttendance(
@@ -11,7 +11,8 @@ const createAttendance = asyncHandler(async (req, res) => {
         req.body.enrollmentId,
         req.body.date,
         req.body.status,
-        req.body.remarks
+        req.body.remarks,
+        req.user.role
     );
 
     return successResponse(
@@ -21,7 +22,6 @@ const createAttendance = asyncHandler(async (req, res) => {
         201
     );
 });
-
 
 const getMyAttendance = asyncHandler(async (req, res) => {
     const attendance = await attendanceService.getMyAttendance(
@@ -35,7 +35,6 @@ const getMyAttendance = asyncHandler(async (req, res) => {
         200
     );
 });
-
 
 const getAttendanceById = asyncHandler(async (req, res) => {
     const attendance = await attendanceService.getAttendanceById(
@@ -52,9 +51,11 @@ const getAttendanceById = asyncHandler(async (req, res) => {
     );
 });
 
-
 const getAllAttendance = asyncHandler(async (req, res) => {
-    const attendance = await attendanceService.getAllAttendance();
+    const attendance = await attendanceService.getAllAttendance(
+        req.user._id,
+        req.user.role
+    );
 
     return successResponse(
         res,
@@ -64,26 +65,29 @@ const getAllAttendance = asyncHandler(async (req, res) => {
     );
 });
 
-
 const getCourseAttendance = asyncHandler(async (req, res) => {
     const attendance = await attendanceService.getCourseAttendance(
-        req.params.courseId
+        req.params.courseId,
+        req.user._id,
+        req.user.role
     );
 
     return successResponse(
         res,
         attendance,
-        "Course attendance fetched successfully"
+        "Course attendance fetched successfully",
+        200
     );
 });
-
 
 const updateAttendance = asyncHandler(async (req, res) => {
     const attendance = await attendanceService.updateAttendance(
         req.params.id,
         req.body.status,
         req.body.date,
-        req.body.remarks
+        req.body.remarks,
+        req.user._id,
+        req.user.role
     );
 
     return successResponse(
@@ -93,14 +97,13 @@ const updateAttendance = asyncHandler(async (req, res) => {
     );
 });
 
-
 const attendanceController = {
     createAttendance,
     getMyAttendance,
     getAttendanceById,
     getAllAttendance,
     getCourseAttendance,
-    updateAttendance
+    updateAttendance,
 };
 
 export default attendanceController;

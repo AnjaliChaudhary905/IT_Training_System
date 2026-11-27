@@ -61,7 +61,8 @@ const getInstructorById = asyncHandler(async (req, res) => {
 const updateInstructor = asyncHandler(async (req, res) => {
     const instructor = await instructorService.updateInstructor(
         req.params.id,
-        req.body
+        req.body,
+        req.file
     );
 
     return successResponse(

@@ -79,6 +79,11 @@ const courseSchema = new mongoose.Schema(
             ref: "User",
             required: true,
         },
+        instructor: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            default: null,
+        },
     },
     {
         timestamps: true,

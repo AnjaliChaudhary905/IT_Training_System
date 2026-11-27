@@ -1,9 +1,11 @@
 import express from "express"
 import protect from "../../middleware/auth.middleware.js";
+import upload from "../../middleware/upload.middleware.js";
 import authorize from "../../middleware/authorize.middleware.js";
 import instructorController from "./instructor.controller.js";
 import { instructorIdValidation, updateInstructorByAdminValidation, updateInstructorStatusValidation, updateInstructorValidation } from "./instructor.validation.js";
 import validate from "../../middleware/validate.middleware.js";
+
 
 
 const router = express.Router();
@@ -44,10 +46,11 @@ router.patch(
     "/:id",
     protect,
     authorize("admin"),
+    upload.single("avatar"),
     updateInstructorByAdminValidation,
     validate,
     instructorController.updateInstructor
-)
+);
 
 router.patch(
     "/:id/status",

@@ -34,6 +34,14 @@ router.get(
     courseController.getAllCourses
 );
 
+// Get courses assigned to logged-in instructor
+router.get(
+    "/my-courses",
+    protect,
+    authorize(ROLES.INSTRUCTOR),
+    courseController.getMyCourses
+);
+
 router.get(
     "/categories",
     courseController.getCategories

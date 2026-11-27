@@ -49,6 +49,35 @@ const userSchema = new mongoose.Schema(
             default: "",
         },
 
+        specialization: {
+            type: String,
+            default: "",
+            trim: true,
+        },
+
+        experience: {
+            type: Number,
+            default: 0,
+            min: 0,
+        },
+
+        qualification: {
+            type: String,
+            default: "",
+            trim: true,
+        },
+
+        bio: {
+            type: String,
+            default: "",
+            trim: true,
+        },
+
+        expertise: {
+            type: [String],
+            default: [],
+        },
+
         isVerified: {
             type: Boolean,
             default: false,

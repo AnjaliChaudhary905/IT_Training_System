@@ -1,4 +1,5 @@
 import User from "../users/user.model.js";
+import uploadToCloudinary from "../../utils/cloudinary.js";
 
 
 const getMyProfile = async (userId) => {
@@ -33,12 +34,23 @@ const updateMyProfile = async (userId, updateData) => {
         "firstName",
         "lastName",
         "phone",
-        "avatar",
+        "specialization",
+        "experience",
+        "qualification",
+        "bio",
+        "expertise",
     ];
 
     allowedFields.forEach((field) => {
         if (updateData[field] !== undefined) {
-            instructor[field] = updateData[field];
+            if (field === "expertise") {
+                instructor[field] =
+                    typeof updateData[field] === "string"
+                        ? JSON.parse(updateData[field])
+                        : updateData[field];
+            } else {
+                instructor[field] = updateData[field];
+            }
         }
     });
 
@@ -53,6 +65,7 @@ const updateMyProfile = async (userId, updateData) => {
 const getAllInstructors = async () => {
     return await User.find({
         role: "instructor",
+        isActive: true,
     })
         .select("-resetPasswordToken -resetPasswordExpire")
         .sort({ createdAt: -1 });
@@ -77,7 +90,8 @@ const getInstructorById = async (instructorId) => {
 
 const updateInstructor = async (
     instructorId,
-    updateData
+    updateData,
+    imageFile
 ) => {
     const instructor = await User.findOne({
         _id: instructorId,
@@ -94,14 +108,35 @@ const updateInstructor = async (
         "firstName",
         "lastName",
         "phone",
-        "avatar",
+        "specialization",
+        "experience",
+        "qualification",
+        "bio",
+        "expertise",
     ];
 
     allowedFields.forEach((field) => {
         if (updateData[field] !== undefined) {
-            instructor[field] = updateData[field];
+            if (field === "expertise") {
+                instructor[field] =
+                    typeof updateData[field] === "string"
+                        ? JSON.parse(updateData[field])
+                        : updateData[field];
+            } else {
+                instructor[field] = updateData[field];
+            }
         }
     });
+
+    // Optional instructor image
+    if (imageFile) {
+        const uploadedImage = await uploadToCloudinary(
+            imageFile.buffer,
+            "IT_Training_System/instructors"
+        );
+
+        instructor.avatar = uploadedImage.secure_url;
+    }
 
     await instructor.save();
 

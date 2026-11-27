@@ -1,6 +1,6 @@
 import express from "express"
 import authorize from "../../middleware/authorize.middleware.js";
-import { createAttendanceValidation, updateAttendanceValidation } from "./attendance.validation.js";
+import { createAttendanceValidation, updateAttendanceValidation, attendanceIdValidation,} from "./attendance.validation.js";
 import validate from "../../middleware/validate.middleware.js";
 import attendanceController from "./attendance.controller.js";
 import protect from "../../middleware/auth.middleware.js";
